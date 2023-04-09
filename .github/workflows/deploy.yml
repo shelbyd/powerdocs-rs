@@ -1,0 +1,30 @@
+name: Deploy
+
+# Concurrency ensures only one run of the workflow is happening at a time.
+concurrency: deploy
+
+on:
+  pull_request:
+    branches:
+      - master
+
+env:
+  SANITY_PROJECT_ID: todo
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Sanity Install
+        run: cargo install -g sanity-cli
+
+      - name: Sanity Login
+        run: |
+          sanity login --token ${{ secrets.SANITY_KEY }}
+
+      - name: Push to Sanity
+        run: |
+          sanity push web/Dockerfile $SANITY_PROJECT_ID/web
