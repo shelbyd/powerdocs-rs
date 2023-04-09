@@ -18,6 +18,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-rust
+          prefix: v0-${{ runner.os }}
+        with:
+          path: |
+            ~/.cargo
+            target/
+          key: ${{ env.prefix }}-${{ env.cache-name }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ env.prefix }}-${{ env.cache-name }}-
+            ${{ env.prefix }}-
+
       - name: Sanity Install
         run: cargo install sanity-cli
 
