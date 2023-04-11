@@ -36,8 +36,8 @@ jobs:
 
       - name: Sanity Login
         run: |
-          sanity login --token ${{ secrets.SANITY_KEY }}
+          sanity --base-api-url https://web-tb546tjmbq-uc.a.run.app/api/v0/ login --token ${{ secrets.SANITY_TOKEN }}
 
       - name: Push to Sanity
         run: |
-          sanity push web/Dockerfile $SANITY_PROJECT_ID/web
+          sanity --base-api-url https://web-tb546tjmbq-uc.a.run.app/api/v0/ push web/Dockerfile $SANITY_PROJECT_ID/web
