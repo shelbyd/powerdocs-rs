@@ -9,7 +9,7 @@ on:
       - master
 
 env:
-  SANITY_PROJECT_ID: todo
+  SANITY_PROJECT_ID: spiky-hose-0231
 
 jobs:
   deploy:
@@ -36,8 +36,8 @@ jobs:
 
       - name: Sanity Login
         run: |
-          sanity --base-api-url https://web-tb546tjmbq-uc.a.run.app/api/v0/ login --token ${{ secrets.SANITY_TOKEN }}
+          sanity login --token ${{ secrets.SANITY_TOKEN }}
 
       - name: Push to Sanity
         run: |
-          sanity --base-api-url https://web-tb546tjmbq-uc.a.run.app/api/v0/ push web/Dockerfile $SANITY_PROJECT_ID/web
+          sanity push web/Dockerfile $SANITY_PROJECT_ID/web
