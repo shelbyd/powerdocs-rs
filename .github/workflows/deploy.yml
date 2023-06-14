@@ -40,4 +40,5 @@ jobs:
 
       - name: Push to Sanity
         run: |
-          sanity push web/Dockerfile $SANITY_PROJECT_ID/web
+          docker build --tag sanity/web --file web/Dockerfile .
+          sanity push sanity/web $SANITY_PROJECT_ID web
