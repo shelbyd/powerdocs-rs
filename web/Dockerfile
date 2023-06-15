@@ -1,1 +1,1 @@
-FROM hello-world
+FROM ealen/echo-server
